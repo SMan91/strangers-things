@@ -26,7 +26,7 @@ export default function Register({ setToken }) {
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          calue={password}
+          value={password}
           placeholder="password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
@@ -36,5 +36,3 @@ export default function Register({ setToken }) {
     </div>
   );
 }
-
-// export default Register;

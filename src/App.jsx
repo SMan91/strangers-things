@@ -1,4 +1,12 @@
-import { Home, Posts, Profile, NavBar, Register, Login } from "components";
+import {
+  Home,
+  Posts,
+  Profile,
+  NavBar,
+  Register,
+  Login,
+  Logout,
+} from "components";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchMe } from "api/authentication";
@@ -22,7 +30,7 @@ export default function App() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar token={token} />
 
       <Routes>
         <Route path="/" element={<Login />} />
@@ -30,6 +38,8 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </div>
   );
