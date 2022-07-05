@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { registerUser } from "api/authentication";
+import { Link } from "react-router-dom";
 
-export default function Register({ setToken }) {
+import { loginUser } from "../api/authentication";
+
+export default function Login({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <div>
-      <h2>Register: </h2>
+      <h2>Login:</h2>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          const result = await registerUser(username, password);
-
-          const token = result.data.token;
-          setToken(token);
-
-          localStorage.setItem("token", token);
+          const result = await loginUser(username, password);
+          localStorage.setItem("token", result.data.token);
+          setToken(result.data.token);
           setPassword("");
           setUsername("");
         }}
@@ -26,15 +26,16 @@ export default function Register({ setToken }) {
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          calue={password}
+          value={password}
           placeholder="password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Submit!</button>
       </form>
+      <span>
+        Not already a member? Click <Link to="/register">Here</Link>
+      </span>
     </div>
   );
 }
-
-// export default Register;
