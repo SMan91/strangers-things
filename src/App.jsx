@@ -6,6 +6,7 @@ import {
   Register,
   Login,
   Logout,
+  CreatePost,
 } from "components";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/createpost" element={<CreatePost />} />
       </Routes>
     </div>
   );

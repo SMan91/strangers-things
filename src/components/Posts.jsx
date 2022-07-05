@@ -1,5 +1,6 @@
 import { fetchAllPosts } from "api/posts";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import SinglePost from "./SinglePost";
 
 const Posts = () => {
@@ -18,6 +19,10 @@ const Posts = () => {
       {postList.map((post, index) => {
         return <SinglePost key={`Key: ${index}`} post={post} />;
       })}
+
+      {localStorage.getItem("token") ? (
+        <Link to="/createpost">Create A Post</Link>
+      ) : null}
     </div>
   );
 };
