@@ -8,7 +8,7 @@ const SinglePost = () => {
 
   useEffect(() => {
     async function getPostById() {
-      const result = await fetchPostById(params._id);
+      const result = await fetchPostById(params.id);
       console.log("result", result);
       setPost(result);
     }
