@@ -6,8 +6,8 @@ const CreatePost = ({ token }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
-  const [willDeliver, setWillDeliver] = useState(null); //TODO: Default is false, implement further logic
-
+  const [willDeliver, setWillDeliver] = useState(false); //TODO: Default is false, implement further logic
+  console.log(willDeliver);
   return (
     <div>
       <form
@@ -42,10 +42,13 @@ const CreatePost = ({ token }) => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
+        <span>Willing to deliver?</span>
         <input
-          placeholder="Willing to deliver?"
+          type="checkbox"
           value={willDeliver}
-          onChange={(e) => setWillDeliver(e.target.value)}
+          onChange={(e) => {
+            setWillDeliver(!willDeliver);
+          }}
         />
         <button type="submit">
           Submit Valid authenticated totally legit twitter verified Post

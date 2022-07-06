@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { loginUser } from "../api/authentication";
 
 export default function Login({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
+  console.log(setToken);
 
   return (
     <div>
@@ -18,6 +20,10 @@ export default function Login({ setToken }) {
           setToken(result.data.token);
           setPassword("");
           setUsername("");
+          console.log(localStorage.getItem("token"));
+          if (localStorage.getItem("token")) {
+            navigate("./home");
+          }
         }}
       >
         <input

@@ -34,11 +34,10 @@ export default function App() {
       <NavBar token={token} />
 
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login setToken={setToken} />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
-        <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/createpost" element={<CreatePost />} />
