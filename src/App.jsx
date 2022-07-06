@@ -9,6 +9,7 @@ import {
   CreatePost,
   SinglePost,
   PostCard,
+  EditPost,
 } from "components";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ export default function App() {
   const [token, setToken] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [postList, setPostList] = useState([]);
+  const [post, setPost] = useState({});
 
   useEffect(() => {
     const myLocalStorageToken = localStorage.getItem("token");
@@ -31,7 +33,7 @@ export default function App() {
       getMe();
     }
   }, [token]);
-
+  console.log("Post LIst from App: ", postList);
   return (
     <div>
       <NavBar token={token} />
@@ -49,7 +51,18 @@ export default function App() {
         <Route path="/createpost" element={<CreatePost token={token} />} />
         <Route
           path="/posts/:id"
-          element={<SinglePost postList={postList} currentUser={currentUser} />}
+          element={
+            <SinglePost
+              post={post}
+              setPost={setPost}
+              postList={postList}
+              currentUser={currentUser}
+            />
+          }
+        />
+        <Route
+          path="/editpost"
+          element={<EditPost token={token} post={post} />}
         />
       </Routes>
     </div>

@@ -38,3 +38,19 @@ export const deletePost = async (id, token) => {
   const result = await response.json();
   return result;
 };
+
+export const editPost = async (token, id, postObj) => {
+  const response = await fetch(`${url}/posts/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      post: postObj,
+    }),
+  });
+
+  const result = await response.json();
+  return result;
+};

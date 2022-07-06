@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { createPost } from "api/posts";
+import { editPost } from "api/posts";
 import { useNavigate } from "react-router-dom";
 
-const CreatePost = ({ token }) => {
+const EditPost = ({ token, post }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
-  const [willDeliver, setWillDeliver] = useState(false); //TODO: Default is false, implement further logic
+  const [willDeliver, setWillDeliver] = useState(false);
+  console.log(willDeliver);
   const navigate = useNavigate();
   return (
     <div>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          const result = await createPost(token, {
+          const result = await editPost(token, post._id, {
             title,
             description,
             price,
@@ -60,4 +61,4 @@ const CreatePost = ({ token }) => {
   );
 };
 
-export default CreatePost;
+export default EditPost;
