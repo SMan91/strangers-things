@@ -1,6 +1,7 @@
 import { fetchAllPosts } from "api/posts";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PostCard from "./PostCard";
 import SinglePost from "./SinglePost";
 
 const Posts = () => {
@@ -17,7 +18,7 @@ const Posts = () => {
   return (
     <div>
       {postList.map((post, index) => {
-        return <SinglePost key={`Key: ${index}`} post={post} />;
+        return <PostCard key={`Key: ${index}`} post={post} />;
       })}
 
       {localStorage.getItem("token") ? (

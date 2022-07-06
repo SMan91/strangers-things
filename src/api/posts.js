@@ -13,8 +13,16 @@ export const createPost = async (token, postObj) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(postObj),
+    body: JSON.stringify({
+      post: postObj,
+    }),
   });
+  const result = await response.json();
+  return result;
+};
+
+export const fetchPostById = async (id) => {
+  const response = await fetch(`${url}/posts/${id}`);
   const result = await response.json();
   return result;
 };

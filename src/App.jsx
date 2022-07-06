@@ -7,6 +7,8 @@ import {
   Login,
   Logout,
   CreatePost,
+  SinglePost,
+  PostCard,
 } from "components";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -40,7 +42,8 @@ export default function App() {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/home" element={<Home />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/createpost" element={<CreatePost token={token} />} />
+        <Route path="/posts/:id" element={<SinglePost />} />
       </Routes>
     </div>
   );

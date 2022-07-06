@@ -20,6 +20,9 @@ const CreatePost = ({ token }) => {
             location,
             willDeliver,
           });
+          console.log(result);
+          console.log("token", token);
+          console.log("title:", title);
         }}
       >
         <input
