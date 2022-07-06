@@ -57,6 +57,7 @@ export default function App() {
               setPost={setPost}
               postList={postList}
               currentUser={currentUser}
+              token={token}
             />
           }
         />
