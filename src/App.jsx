@@ -17,6 +17,7 @@ import { fetchMe } from "api/authentication";
 export default function App() {
   const [token, setToken] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
+  const [postList, setPostList] = useState([]);
 
   useEffect(() => {
     const myLocalStorageToken = localStorage.getItem("token");
@@ -37,13 +38,19 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<Login setToken={setToken} />} />
-        <Route path="/posts" element={<Posts />} />
+        <Route
+          path="/posts"
+          element={<Posts postList={postList} setPostList={setPostList} />}
+        />
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route path="/logout" element={<Logout setToken={setToken} />} />
         <Route path="/createpost" element={<CreatePost token={token} />} />
-        <Route path="/posts/:id" element={<SinglePost />} />
+        <Route
+          path="/posts/:id"
+          element={<SinglePost postList={postList} currentUser={currentUser} />}
+        />
       </Routes>
     </div>
   );

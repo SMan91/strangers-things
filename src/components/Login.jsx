@@ -22,7 +22,7 @@ export default function Login({ setToken }) {
           setUsername("");
           console.log(localStorage.getItem("token"));
           if (localStorage.getItem("token")) {
-            navigate("./home");
+            navigate("/home");
           }
         }}
       >

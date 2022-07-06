@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import PostCard from "./PostCard";
 import SinglePost from "./SinglePost";
 
-const Posts = () => {
-  const [postList, setPostList] = useState([]);
-
+const Posts = ({ postList, setPostList }) => {
   useEffect(() => {
     const getAllPosts = async () => {
       const result = await fetchAllPosts();
@@ -17,13 +15,13 @@ const Posts = () => {
 
   return (
     <div>
-      {postList.map((post, index) => {
-        return <PostCard key={`Key: ${index}`} post={post} />;
-      })}
-
       {localStorage.getItem("token") ? (
         <Link to="/createpost">Create A Post</Link>
       ) : null}
+
+      {postList.map((post, index) => {
+        return <PostCard key={`Key: ${index}`} post={post} />;
+      })}
     </div>
   );
 };
