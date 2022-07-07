@@ -5,8 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 const SinglePost = ({ post, setPost, postList, currentUser, token }) => {
   const params = useParams();
   let navigate = useNavigate();
-  const [message, setMessage] = useState({});
   const [content, setContent] = useState("");
+  console.log("PostList from singlePost:", postList);
 
   useEffect(() => {
     const filteredPost = postList.filter((post) => {

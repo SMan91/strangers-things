@@ -6,6 +6,12 @@ export const fetchAllPosts = async () => {
   return result;
 };
 
+export const fetchAllMessages = async (postId) => {
+  const response = await fetch(`${url}/posts/${postId}`);
+  const result = await response.json();
+  return result;
+};
+
 export const createPost = async (token, postObj) => {
   const response = await fetch(`${url}/posts`, {
     method: "POST",

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ post }) => {
-  console.log(post);
+  // console.log(post);
   const navigate = useNavigate();
   return (
     <div
