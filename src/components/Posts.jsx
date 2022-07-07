@@ -5,13 +5,13 @@ import PostCard from "./PostCard";
 import SinglePost from "./SinglePost";
 
 const Posts = ({ postList, setPostList }) => {
-  useEffect(() => {
-    const getAllPosts = async () => {
-      const result = await fetchAllPosts();
-      setPostList(result.data.posts);
-    };
-    getAllPosts();
-  }, []);
+  // useEffect(() => {
+  //   const getAllPosts = async () => {
+  //     const result = await fetchAllPosts();
+  //     setPostList(result.data.posts);
+  //   };
+  //   getAllPosts();
+  // }, []);
 
   return (
     <div>

@@ -6,11 +6,12 @@ export const fetchAllPosts = async () => {
   return result;
 };
 
-export const fetchAllMessages = async (postId) => {
-  const response = await fetch(`${url}/posts/${postId}`);
-  const result = await response.json();
-  return result;
-};
+// export const fetchAllMessages = async (postId) => {
+//   const response = await fetch(`${url}/posts/${postId}/messages`);
+//   console.log("the message url is: ", `${url}/posts/${postId}/messages`);
+//   const result = await response.json();
+//   return result;
+// };
 
 export const createPost = async (token, postObj) => {
   const response = await fetch(`${url}/posts`, {
@@ -62,7 +63,7 @@ export const editPost = async (token, id, postObj) => {
 };
 
 export const sendMessage = async (content, token, id) => {
-  const response = await fetch(`${url}/posts/${id}`, {
+  const response = await fetch(`${url}/posts/${id}/messages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { fetchAllMessages, fetchAllPosts } from "api/posts";
+import React, { useEffect, useState } from "react";
+import { fetchAllPosts } from "api/posts";
 import MessageCard from "./MessageCard";
 import { useParams } from "react-router-dom";
 
@@ -10,37 +10,32 @@ const Home = ({
   setPostList,
   currentUser,
 }) => {
-  useEffect(() => {
-    const getAllPosts = async () => {
-      const result = await fetchAllPosts();
-      setPostList(result.data.posts);
-    };
-    getAllPosts();
-  }, []);
-
-  // const postId = post._id;
-  console.log("PostList from Home", postList);
+  const [authoredPosts, setAuthoredPosts] = useState([]);
+  const [content, setContent] = useState([]);
+  const [author, setAuthor] = useState([]);
 
   const params = useParams();
-  console.log("params:", params);
+
   useEffect(() => {
-    const filteredPost = postList.filter((post) => {
-      return post._id === params.id;
-    });
+    if (postList.length && currentUser._id) {
+      const filteredPostList = postList.filter((post) => {
+        console.log("the author id is: ", post.author._id);
+        console.log("the current user id is: ", currentUser._id);
+        return post.author._id === currentUser._id;
+      });
+      setAuthoredPosts(filteredPostList);
+      console.log("the authored posts are: ", authoredPosts);
+      for (let i = 0; i < currentUser.messages.length; i++) {
+        let messageContent = currentUser.messages[i].content;
+        console.log(messageContent);
+        let messageAuthor = currentUser.messages[i].fromUser.username;
+        console.log(messageAuthor);
+      }
 
-    //   const getAllMessages = async () => {
-    //     const result = await fetchAllMessages();
-    //     console.log("result printing: ", result);
-    //     setMessageList(result.data.posts);
-    //   };
-    //   getAllMessages();
-  }, []);
+      console.log("the filtered postlist is:", filteredPostList);
+    }
+  }, [postList, currentUser]);
 
-  /*
-  conditions:
-  1)filter for posts we are the author of
-
-  */
   return <div></div>;
 };
 

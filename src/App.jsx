@@ -14,6 +14,7 @@ import {
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchMe } from "api/authentication";
+import { fetchAllPosts } from "api/posts";
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -23,6 +24,7 @@ export default function App() {
   const [post, setPost] = useState({});
   const [message, setMessage] = useState({});
 
+  console.log("the current user from APP is:", currentUser);
   useEffect(() => {
     const myLocalStorageToken = localStorage.getItem("token");
 
@@ -35,7 +37,16 @@ export default function App() {
       getMe();
     }
   }, [token]);
-  console.log("Post LIst from App: ", postList);
+
+  useEffect(() => {
+    const getAllPosts = async () => {
+      const result = await fetchAllPosts();
+      setPostList(result.data.posts);
+    };
+    getAllPosts();
+  }, []);
+
+  // console.log("Post LIst from App: ", postList);
   return (
     <div>
       <NavBar token={token} />

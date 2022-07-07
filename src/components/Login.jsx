@@ -6,23 +6,31 @@ import { loginUser } from "../api/authentication";
 export default function Login({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   let navigate = useNavigate();
   console.log(setToken);
 
   return (
     <div>
       <h2>Login:</h2>
+      {errorMessage ? <h4>{errorMessage}</h4> : null}
       <form
         onSubmit={async (e) => {
           e.preventDefault();
           const result = await loginUser(username, password);
-          localStorage.setItem("token", result.data.token);
-          setToken(result.data.token);
-          setPassword("");
-          setUsername("");
-          console.log(localStorage.getItem("token"));
-          if (localStorage.getItem("token")) {
-            navigate("/home");
+          if (result.success) {
+            setErrorMessage("");
+            localStorage.setItem("token", result.data.token);
+            setToken(result.data.token);
+            setPassword("");
+            setUsername("");
+            // console.log(localStorage.getItem("token"));
+            if (localStorage.getItem("token")) {
+              navigate("/home");
+            }
+          } else {
+            const errorMessage = result.error.meesage;
+            setErrorMessage(errorMessage);
           }
         }}
       >
