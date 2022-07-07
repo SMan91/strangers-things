@@ -5,21 +5,36 @@ import PostCard from "./PostCard";
 import SinglePost from "./SinglePost";
 
 const Posts = ({ postList, setPostList }) => {
-  // useEffect(() => {
-  //   const getAllPosts = async () => {
-  //     const result = await fetchAllPosts();
-  //     setPostList(result.data.posts);
-  //   };
-  //   getAllPosts();
-  // }, []);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function postMatches(post, text) {
+    if (post.title.includes(text)) {
+      return true;
+    }
+    return false;
+  }
+
+  const filteredPosts = postList.filter((post) =>
+    postMatches(post, searchTerm)
+  );
+  const postsToDisplay = searchTerm.length ? filteredPosts : postList;
+  console.log("posts:");
+  console.log(postsToDisplay);
 
   return (
     <div>
       {localStorage.getItem("token") ? (
         <Link to="/createpost">Create A Post</Link>
       ) : null}
+      <div>
+        <input
+          placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        ></input>
+      </div>
 
-      {postList.map((post, index) => {
+      {postsToDisplay.map((post, index) => {
         return <PostCard key={`Key: ${index}`} post={post} />;
       })}
     </div>

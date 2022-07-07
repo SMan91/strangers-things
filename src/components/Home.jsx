@@ -25,6 +25,7 @@ const Home = ({
       });
       setAuthoredPosts(filteredPostList);
       console.log("the authored posts are: ", authoredPosts);
+
       for (let i = 0; i < currentUser.messages.length; i++) {
         let messageContent = currentUser.messages[i].content;
         console.log(messageContent);
@@ -36,7 +37,45 @@ const Home = ({
     }
   }, [postList, currentUser]);
 
-  return <div></div>;
+  // let sentMessages = currentUser.messages.map((message, index) => {
+  //   if (message.fromUser._id === currentUser._id) {
+  //     return message;
+  //   }
+  // });
+  let sentMessages = [];
+  currentUser.messages.map((message, index) => {
+    if (message.fromUser._id === currentUser._id) {
+      sentMessages.push(message);
+    }
+  });
+
+  let receivedMessages = [];
+  currentUser.messages.map((message) => {
+    if (message.fromUser._id !== currentUser._id) {
+      receivedMessages.push(message);
+    }
+  });
+
+  console.log("Received Messages array:", receivedMessages);
+
+  console.log("Sent Messages Array:", sentMessages);
+  return (
+    <div>
+      <div>
+        <h2>Received Messages</h2>
+        {receivedMessages.map((message, index) => {
+          return <MessageCard key={`Key: ${index}`} message={message} />;
+        })}
+      </div>
+
+      <div>
+        <h2>Sent Messages</h2>
+        {sentMessages.map((message, index) => {
+          return <MessageCard key={`Key: ${index}`} message={message} />;
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default Home;

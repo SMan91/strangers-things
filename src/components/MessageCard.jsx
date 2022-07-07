@@ -4,15 +4,19 @@ import { useNavigate } from "react-router-dom";
 const MessageCard = ({ message }) => {
   const navigate = useNavigate();
 
-  console.log("message:", message);
+  console.log("message from message card:", message);
+  console.log("Object type for message:", typeof message);
   return (
     <div
       onClick={() => {
-        navigate(`${message._id}`);
+        navigate(`/posts/${message.post._id}`);
       }}
     >
-      {/* <h3>{message.post}</h3> */}
-      <p>Decription: {message.content} </p>
+      {/* < */}
+      <p>Message from Post: {message.post.title}</p>
+      <p>Author: {message.fromUser.username}</p>
+      <p>Message: {message.content} </p>
+      <br />
     </div>
   );
 };
